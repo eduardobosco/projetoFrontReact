@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     color: '#5FD393',
     alignSelf: 'center',
     padding: 20,
+    fontFamily: 'Tahoma'
   },
   flat: {
     borderRadius: 10,
@@ -25,11 +26,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonText: {
-    padding: 15,
+    padding: 10,
     fontWeight: 'bold',
     fontSize: 16,
     color: '#12132F',
     alignSelf: 'center',
+    fontFamily: 'Tahoma',
   },
   textModal: {
     fontSize: 24,
@@ -64,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {styles};
+export { styles };

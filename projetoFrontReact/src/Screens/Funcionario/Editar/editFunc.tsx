@@ -1,9 +1,22 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, StatusBar } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { TextInput, View, Text, Image, StyleSheet, StatusBar } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Modal from 'react-native-modal';
+import BtnModal from '../../../Components/Button/BtnModal';
 import Header from '../../../Components/Header/Header';
 
 
-const editFunc = (nome, cpf) => {
+const editFunc = ({ navigation, route }) => {
+
+    const [visible, setVisible] = useState(false);
+
+    const { nome, cpf } = route.params;
+
+    console.log(nome, cpf)
+
+    function goBack() {
+        navigation.navigate('Funcionario')
+    }
 
     return (
         <>
@@ -18,6 +31,32 @@ const editFunc = (nome, cpf) => {
                     </View>
                 </View>
             </View>
+
+            <TouchableOpacity onPress={goBack}>
+                <Text>Voltar</Text>
+            </TouchableOpacity>
+
+            {/* <Modal isVisible={visible}>
+                <View style={{ backgroundColor: '#fff', height: 300 }}>
+                    <Text style={styles.textModal}>Cadastrar Funcionário</Text>
+
+                    <TextInput onChangeText={text => setName(text)}
+                        value={nome}
+                        style={styles.input}
+                        placeholder="Nome Completo" />
+
+                    <TextInput onChangeText={text => setCpf(text)}
+                        value={cpf}
+                        style={styles.input}
+                        placeholder="CPF" />
+
+                    <BtnModal
+                        buttonStyle={styles.btnModal}
+                        title="Salvar"
+                        onPress={() => { salvar(); }}
+                    />
+                </View>
+            </Modal> */}
 
         </>
     );

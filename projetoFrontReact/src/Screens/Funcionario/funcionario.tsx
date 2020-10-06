@@ -18,6 +18,7 @@ import BtnModal from '../../Components/Button/BtnModal';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
+
 const Funcionario = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
   const [funcionarios, setFuncionarios] = useState<TypesFunc[]>([]);
@@ -52,9 +53,12 @@ const Funcionario = ({ navigation }) => {
     setVisible(false);
   }
 
+  const edit = (item) => {
+    console.log(item)
+    navigation.navigate('EditarFuncionario', { nome: item.nome, cpf: item.cpf })
+  }
 
-
-  const renderItem = ({ item }) => <Item id={item.id} nome={item.nome} cpf={item.cpf} />;
+  const renderItem = ({ item }) => <Item id={item.id} nome={item.nome} cpf={item.cpf} onPress={() => edit(item)} />;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -63,17 +67,14 @@ const Funcionario = ({ navigation }) => {
       <FlatList
         data={funcionarios}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
 
       />
 
       <TouchableOpacity style={styles.button}>
         <Text
           style={styles.buttonText}
-          onPress={() => {
-            setVisible(true);
-          }}>
-          Novo Funcionário
+          onPress={() => { setVisible(true); }}>Novo Funcionário
         </Text>
       </TouchableOpacity>
 
