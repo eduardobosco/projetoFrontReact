@@ -17,7 +17,7 @@ const editFunc = ({ navigation, route }) => {
     const [novoNome, setNovoNome] = useState(nome);
     const [novoCpf, setNovoCpf] = useState(cpf);
 
-    console.log('Editar', id, nome, cpf)
+       console.log('Editar', id, nome, cpf)
 
     const deleteFunc = async () => {
         Alert.alert(

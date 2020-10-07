@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, Text, View, StyleSheet, StatusBar } from 'react-native';
 import ButtonAdm from '../../Components/Button/ButtonAdm';
 import Header from '../../Components/Header/Header';
+import {styles} from './styles';
 
 
 const AdmScreen = ({ navigation }) => {
@@ -37,26 +38,5 @@ const AdmScreen = ({ navigation }) => {
         </ScrollView>
     );
 };
-
-const styles = StyleSheet.create({
-    display: {
-        flex: 1,
-        backgroundColor: '#12132F',
-    },
-    titleContainer: {
-        fontFamily: 'Tahoma',
-    },
-    titleText: {
-        fontSize: 30,
-        color: '#5FD393',
-        alignSelf: 'center',
-        marginBottom: 50,
-        marginTop: 40,
-    },
-    buttonView: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-});
 
 export default AdmScreen;

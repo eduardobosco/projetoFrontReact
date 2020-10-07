@@ -7,7 +7,7 @@ import {
   FlatList,
   TextInput,
   TouchableOpacity,
-  Alert, RefreshControl,
+  Alert, 
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { TypesFunc } from './types';
@@ -25,6 +25,11 @@ const Funcionario = ({ navigation }) => {
   const [funcionarios, setFuncionarios] = useState<TypesFunc[]>([]);
   const [nome, setName] = useState('');
   const [cpf, setCpf] = useState('');
+
+const unsubscribe = navigation.addListener('focus', () => {
+  getFromApi();
+      // Call any action
+    });
 
   useEffect(() => {
     getFromApi();
