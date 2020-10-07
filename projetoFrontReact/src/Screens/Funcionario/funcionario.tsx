@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Button,
   Text,
   View,
-  StyleSheet,
   FlatList,
   TextInput,
   TouchableOpacity,
@@ -27,8 +25,7 @@ const Funcionario = ({ navigation }) => {
   const [cpf, setCpf] = useState('');
 
 const unsubscribe = navigation.addListener('focus', () => {
-  getFromApi();
-      // Call any action
+    getFromApi();
     });
 
   useEffect(() => {
@@ -54,7 +51,7 @@ const unsubscribe = navigation.addListener('focus', () => {
         setCpf('');
       })
       .catch((err) => Alert.alert('Erro ao Cadastrar Funcionario!'));
-    //Alert.alert('Erro ao Cadastrar Funcionario!')
+    
     getFromApi();
     setVisible(false);
   }
