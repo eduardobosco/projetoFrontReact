@@ -24,7 +24,10 @@ const LoginScreen = ({ navigation }) => {
                 for ( const login of logins ){
                     if ((usuario == login.user) && (senha == login.password)) 
                     {   
-                        navigation.navigate('Funcionario');
+                        navigation.reset({
+                            index: 0,
+                            routes: [{ name: 'Funcionario' }],
+                        });
                         break;
                     }
                     else{
