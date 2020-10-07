@@ -15,8 +15,7 @@ const Stack = createStackNavigator();
 const stackNavigator = () => {
     return (
 
-        <Stack.Navigator initialRouteName='Funcionario'>
-            <Stack.Screen name="Welcome" component={Welcome} options={{ headerShown: false }} />
+        <Stack.Navigator initialRouteName='Login'>
             <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
             <Stack.Screen name="Adm" component={Adm} options={{ headerShown: false }} />
             <Stack.Screen name="Funcionario" component={Funcionario} options={{ headerShown: false }} />

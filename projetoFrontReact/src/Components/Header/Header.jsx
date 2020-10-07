@@ -6,7 +6,7 @@ const Header = () => {
         <View style={styles.header}>
 
             <View style={styles.headerText}>
-                <Text style={styles.headerText1}>Pencet </Text>
+                <Text style={styles.headerText1}>Pencet</Text>
             </View>
 
             <View>

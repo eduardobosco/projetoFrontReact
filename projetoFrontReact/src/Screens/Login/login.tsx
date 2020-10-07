@@ -3,7 +3,13 @@ import { StatusBar, StyleSheet, Text, View, ImageBackground, Image } from 'react
 import { TextInput } from 'react-native-gesture-handler';
 import BtnLogin from '../../Components/Button/BtnLogin';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
+
+    const goToAdm = () => {
+        navigation.navigate("Adm")
+    }
+
+
     return (
         <ImageBackground style={styles.imageBackground}
             resizeMode='cover'
@@ -29,7 +35,9 @@ const LoginScreen = () => {
 
             <View>
                 <Text style={styles.forgoten}>Esqueceu a sua senha?</Text>
-                <BtnLogin title='ACESSAR' />
+                <BtnLogin
+                    onPress={goToAdm}
+                    title='ACESSAR' />
                 <Text style={styles.forgoten}>Crie sua conta</Text>
             </View>
 
