@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar, StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import BtnLogin from '../../Components/Button/BtnLogin';
+import criarConta from '../../Schemas/criarConta'
 
 const LoginScreen = ({ navigation }) => {
+
+    const [visible, setVisible] = useState(false);
+    const [usuario, setUsuario] = useState('');
+    const [senha, setSenha] = useState('');
 
     const goToAdm = () => {
         navigation.navigate("Adm")
     }
+
+    const conta = () => {
+        Realm.open({ schema: [criarConta] }).then((realm) => {
+            realm.write(() => {
+                realm.create('Conta', {
+                    usuario: usuario,
+                    senha: senha,
+                });
+            });
+            const contas = realm.objects('Conta')
+        });
+    },
 
 
     return (
@@ -28,8 +45,22 @@ const LoginScreen = ({ navigation }) => {
             </View>
 
             <View style={styles.containerLogin}>
-                <TextInput style={styles.loginText} placeholder='E-Mail' placeholderTextColor='#5FD393' />
-                <TextInput style={styles.loginText} placeholder='Senha' placeholderTextColor='#5FD393' />
+                <TextInput
+                    style={{ fontSize: 18 }}
+                    onChangeText={setUsuario}
+                    value={usuario}
+                    style={styles.loginText}
+                    placeholder='Usuário'
+                    placeholderTextColor='#5FD393' />
+
+                <TextInput
+                    style={{ fontSize: 18 }}
+                    onChangeText={setSenha}
+                    value={senha}
+                    secureTextEntry={true}
+                    style={styles.loginText}
+                    placeholder='Senha'
+                    placeholderTextColor='#5FD393' />
             </View>
 
 
@@ -38,8 +69,32 @@ const LoginScreen = ({ navigation }) => {
                 <BtnLogin
                     onPress={goToAdm}
                     title='ACESSAR' />
-                <Text style={styles.forgoten}>Crie sua conta</Text>
+                <TouchableOpacity>
+                    <Text style={styles.forgoten}>Crie sua conta</Text>
+                </TouchableOpacity>
             </View>
+
+            <Modal onBackdropPress={() => setVisible(false)} isVisible={visible} >
+                <View style={{ backgroundColor: '#fff', height: 300 }}>
+                    <Text style={styles.textModal}>Criar Nova Conta</Text>
+
+                    <TextInput onChangeText={text => setUsuario(text)}
+                        value={usuario}
+                        style={styles.input}
+                        placeholder="Nome de Usuario" />
+
+                    <TextInput onChangeText={text => setSenha(text)}
+                        value={senha}
+                        style={styles.input}
+                        placeholder="senha" />
+
+                    <BtnModal
+                        buttonStyle={styles.btnModal}
+                        title="Salvar"
+                        onPress={conta}
+                    />
+                </View>
+            </Modal>
 
         </ImageBackground>
     );
