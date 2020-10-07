@@ -7,7 +7,7 @@ import {
   FlatList,
   TextInput,
   TouchableOpacity,
-  Alert,
+  Alert, RefreshControl,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { TypesFunc } from './types';
@@ -16,6 +16,7 @@ import api from '../../Api/api';
 import Item from '../../Components/Flatlist/Flatlist';
 import BtnModal from '../../Components/Button/BtnModal';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../Components/Header/Header';
 
 
 
@@ -55,30 +56,34 @@ const Funcionario = ({ navigation }) => {
 
   const edit = (item) => {
     console.log(item)
-    navigation.navigate('EditarFuncionario', { nome: item.nome, cpf: item.cpf })
+    navigation.navigate('EditarFuncionario', { id: item.id, nome: item.nome, cpf: item.cpf })
   }
 
   const renderItem = ({ item }) => <Item id={item.id} nome={item.nome} cpf={item.cpf} onPress={() => edit(item)} />;
 
   return (
     <SafeAreaView style={styles.container}>
+
+      <Header />
+
       <Text style={styles.title}>Funcionários</Text>
 
       <FlatList
         data={funcionarios}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
+        refreshing={true}
 
       />
 
       <TouchableOpacity style={styles.button}>
         <Text
           style={styles.buttonText}
-          onPress={() => { setVisible(true); }}>Novo Funcionário
+          onPress={() => setVisible(true)}>Novo Funcionário
         </Text>
       </TouchableOpacity>
 
-      <Modal isVisible={visible}>
+      <Modal onBackdropPress={() => setVisible(false)} isVisible={visible} >
         <View style={{ backgroundColor: '#fff', height: 300 }}>
           <Text style={styles.textModal}>Cadastrar Funcionário</Text>
 

@@ -21,7 +21,7 @@ const stackNavigator = () => {
             <Stack.Screen name="Adm" component={Adm} options={{ headerShown: false }} />
             <Stack.Screen name="Funcionario" component={Funcionario} options={{ headerShown: false }} />
             <Stack.Screen name="EditarFuncionario" component={EditarFuncionario} options={{ headerShown: false }} />
-            <Stack.Screen name="Root" component={BottonTabNavigator} options={{ headerShown: false }} />
+            {/* <Stack.Screen name="Root" component={BottonTabNavigator} options={{ headerShown: false }} /> */}
 
 
         </Stack.Navigator>

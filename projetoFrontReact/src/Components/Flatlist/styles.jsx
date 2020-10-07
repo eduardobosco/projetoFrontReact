@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   nome: {
     fontSize: 20,
-    width: 250,
+    width: 230,
   },
   cargo: {
     fontSize: 16,
