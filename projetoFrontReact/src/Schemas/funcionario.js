@@ -3,7 +3,7 @@ const Realm = require('realm');
 const FuncionarioOffline = {
     name: 'Funcionario',
     properties: {
-        id: 'string',
+        id: 'int',
         nome: 'string',
         cpf: 'string',
     }

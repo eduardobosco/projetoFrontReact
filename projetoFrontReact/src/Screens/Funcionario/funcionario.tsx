@@ -36,31 +36,40 @@ const Funcionario = ({ navigation }) => {
 
   const getFromApi = async () => {
 
-    const testeNet = NetInfo.addEventListener(state => {
+    const testeNet = NetInfo.addEventListener(async (state) => {
       console.log("Connection type", state.type);
       console.log("Is connected?", state.isConnected);
 
       if (state.isConnected) {
-        api
-          .get('/funcionario')
-          .then((response) => {
-            setFuncionarios(response.data);
-          })
-          .catch(() => Alert.alert('Erro ao listar os Funcionarios!'));
-        console.log('log:', funcionarios)
-        Realm.open({ schema: [FuncionarioOffline] }).then(
-          realm => { realm.deleteAll });
-        Realm.open({ schema: [FuncionarioOffline] }).then(
-          realm => {
-            realm.write(() => {
-              const dados = realm.create('Funcionario', {
-                id: funcionarios.id,
-                nome: funcionarios.nome,
-                cpf: funcionarios.cpf,
+        try {
+          const response = await api
+            .get('/funcionario')
+
+          const funcionariosAPI = response.data
+
+          setFuncionarios(response.data);
+
+
+          console.log('log:', funcionarios)
+
+          Realm.open({ schema: [FuncionarioOffline] }).then(
+            realm => { realm.deleteAll });
+
+          Realm.open({ schema: [FuncionarioOffline] }).then(
+            realm => {
+              realm.write(() => {
+                funcionariosAPI.map((funcionario) => {
+                  realm.create('Funcionario', {
+                    id: funcionario.id,
+                    nome: funcionario.nome,
+                    cpf: funcionario.cpf,
+                  })
+                })
               })
-            })
-          });
-        Alert.alert('tenho internet')
+            });
+        } catch (err) {
+          console.log(err)
+        }
       } else {
         Realm.open({ schema: [FuncionarioOffline] }).then(
           realm => {
