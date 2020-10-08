@@ -2,6 +2,7 @@ const Realm = require('realm');
 
 const FuncionarioOffline = {
     name: 'Funcionario',
+
     properties: {
         id: 'int',
         nome: 'string',
@@ -10,3 +11,4 @@ const FuncionarioOffline = {
 };
 
 export default FuncionarioOffline;
+

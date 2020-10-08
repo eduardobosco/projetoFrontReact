@@ -50,10 +50,15 @@ const Funcionario = ({ navigation }) => {
           setFuncionarios(response.data);
 
 
-          console.log('log:', funcionarios)
+          console.log('log:', funcionariosAPI)
 
           Realm.open({ schema: [FuncionarioOffline] }).then(
-            realm => { realm.deleteAll });
+            realm => {
+              realm.write(() => {
+                realm.delete(realm.objects('Funcionario'))
+              });
+            });
+
 
           Realm.open({ schema: [FuncionarioOffline] }).then(
             realm => {
@@ -67,6 +72,12 @@ const Funcionario = ({ navigation }) => {
                 })
               })
             });
+          Realm.open({ schema: [FuncionarioOffline] }).then(
+            realm => {
+              const dados = realm.objects('Funcionario')
+              console.log("OFF", dados);
+            });
+
         } catch (err) {
           console.log(err)
         }
@@ -74,7 +85,7 @@ const Funcionario = ({ navigation }) => {
         Realm.open({ schema: [FuncionarioOffline] }).then(
           realm => {
             const dados = realm.objects('Funcionario');
-            console.log('2', dados)
+
             setFuncionarios(dados);
           });
         Alert.alert('Não tenho internet')
@@ -86,7 +97,7 @@ const Funcionario = ({ navigation }) => {
 
   const salvar = async () => {
     const dados = { nome, cpf };
-    console.log(dados)
+
     api.post('/funcionario', dados)
       .then(() => {
         Alert.alert('Funcionario Cadastrado com Sucesso!');
@@ -103,7 +114,7 @@ const Funcionario = ({ navigation }) => {
       console.log("Connection type", state.type);
       console.log("Is connected?", state.isConnected);
       if (state.isConnected) {
-        Alert.alert('testando net')
+        // Alert.alert('testando net')
         setVisible(true);
       } else {
         Alert.alert('Esta ação necessita de conexão com a internet');
