@@ -16,7 +16,7 @@ import BtnModal from '../../Components/Button/BtnModal';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../Components/Header/Header';
 import NetInfo from "@react-native-community/netinfo";
-import FuncionarioOffline from '../../Schemas/funcionario'
+import FuncionarioOff from '../../Schemas/funcionario'
 
 
 const Funcionario = ({ navigation }) => {
@@ -52,6 +52,7 @@ const Funcionario = ({ navigation }) => {
 
           console.log('log:', funcionariosAPI)
 
+<<<<<<< HEAD
           Realm.open({ schema: [FuncionarioOffline] }).then(
             realm => {
               realm.write(() => {
@@ -59,8 +60,11 @@ const Funcionario = ({ navigation }) => {
               });
             });
 
+=======
 
-          Realm.open({ schema: [FuncionarioOffline] }).then(
+>>>>>>> 306e4966e5ed7d2069b445156c28152329d218c1
+
+          Realm.open({ schema: [FuncionarioOff] }).then(
             realm => {
               realm.write(() => {
                 funcionariosAPI.map((funcionario) => {
@@ -82,15 +86,13 @@ const Funcionario = ({ navigation }) => {
           console.log(err)
         }
       } else {
-        Realm.open({ schema: [FuncionarioOffline] }).then(
+        Realm.open({ schema: [FuncionarioOff] }).then(
           realm => {
             const dados = realm.objects('Funcionario');
 
             setFuncionarios(dados);
           });
-        Alert.alert('Não tenho internet')
       }
-      // setOnline(state.isConnected);
     });
     testeNet();
   };
@@ -111,10 +113,12 @@ const Funcionario = ({ navigation }) => {
   }
   const novoFuncionario = () => {
     const testeNet = NetInfo.addEventListener(state => {
-      console.log("Connection type", state.type);
-      console.log("Is connected?", state.isConnected);
+
       if (state.isConnected) {
+<<<<<<< HEAD
         // Alert.alert('testando net')
+=======
+>>>>>>> 306e4966e5ed7d2069b445156c28152329d218c1
         setVisible(true);
       } else {
         Alert.alert('Esta ação necessita de conexão com a internet');
