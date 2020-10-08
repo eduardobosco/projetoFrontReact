@@ -32,7 +32,7 @@ const unsubscribe = navigation.addListener('focus', () => {
     getFromApi();
   }, []);
 
-  const getFromApi = async () => {
+  const getFromApi = async() => {
     api
       .get('/funcionario')
       .then((response) => {
@@ -52,8 +52,8 @@ const unsubscribe = navigation.addListener('focus', () => {
       })
       .catch((err) => Alert.alert('Erro ao Cadastrar Funcionario!'));
     
-    getFromApi();
-    setVisible(false);
+      setVisible(false);
+      getFromApi();
   }
 
   const edit = (item) => {

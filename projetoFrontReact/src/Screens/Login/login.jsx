@@ -26,7 +26,7 @@ const LoginScreen = ({ navigation }) => {
                     {   
                         navigation.reset({
                             index: 0,
-                            routes: [{ name: 'Funcionario' }],
+                            routes: [{ name: 'Adm' }],
                         });
                         break;
                     }
