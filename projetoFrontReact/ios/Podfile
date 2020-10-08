@@ -10,6 +10,8 @@ target 'projetoFrontReact' do
 
   pod 'RealmJS', :path => '../node_modules/realm'
 
+  pod 'react-native-netinfo', :path => '../node_modules/@react-native-community/netinfo'
+
   target 'projetoFrontReactTests' do
     inherit! :complete
     # Pods for testing

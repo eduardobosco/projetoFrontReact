@@ -1,12 +1,11 @@
 const Realm = require('realm');
 
-// Define your models and their properties
-const CriarConta = {
+const ContaSchema = {
     name: 'Conta',
     properties: {
-        usuario: 'string',
-        senha: 'string',
+        user: 'string',
+        password: 'string',
     }
 };
 
-export default CriarConta;
+export default ContaSchema;
