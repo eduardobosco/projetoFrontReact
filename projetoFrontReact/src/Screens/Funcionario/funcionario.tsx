@@ -52,17 +52,13 @@ const Funcionario = ({ navigation }) => {
 
           console.log('log:', funcionariosAPI)
 
-<<<<<<< HEAD
-          Realm.open({ schema: [FuncionarioOffline] }).then(
+          Realm.open({ schema: [FuncionarioOff] }).then(
             realm => {
               realm.write(() => {
                 realm.delete(realm.objects('Funcionario'))
               });
             });
 
-=======
-
->>>>>>> 306e4966e5ed7d2069b445156c28152329d218c1
 
           Realm.open({ schema: [FuncionarioOff] }).then(
             realm => {
@@ -76,7 +72,7 @@ const Funcionario = ({ navigation }) => {
                 })
               })
             });
-          Realm.open({ schema: [FuncionarioOffline] }).then(
+          Realm.open({ schema: [FuncionarioOff] }).then(
             realm => {
               const dados = realm.objects('Funcionario')
               console.log("OFF", dados);
@@ -115,10 +111,6 @@ const Funcionario = ({ navigation }) => {
     const testeNet = NetInfo.addEventListener(state => {
 
       if (state.isConnected) {
-<<<<<<< HEAD
-        // Alert.alert('testando net')
-=======
->>>>>>> 306e4966e5ed7d2069b445156c28152329d218c1
         setVisible(true);
       } else {
         Alert.alert('Esta ação necessita de conexão com a internet');
