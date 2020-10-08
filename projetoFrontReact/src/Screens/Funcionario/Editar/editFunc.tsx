@@ -7,6 +7,7 @@ import { TextInput } from 'react-native-gesture-handler';
 import api from '../../../Api/api';
 import CustomModal from '../../../Components/Modal/Modal';
 import { styles } from './styles';
+import NetInfo from "@react-native-community/netinfo";
 
 
 
@@ -17,50 +18,69 @@ const editFunc = ({ navigation, route }) => {
     const [novoNome, setNovoNome] = useState(nome);
     const [novoCpf, setNovoCpf] = useState(cpf);
 
-       console.log('Editar', id, nome, cpf)
-
     const deleteFunc = async () => {
-        Alert.alert(
-            "Atenção",
-            "Você tem certeza que deseja excluir este item?",
-            [
-                {
-                    text: "Não",
-                    onPress: () => console.log("Cancel Pressed"),
-                    style: "cancel"
-                },
-                {
-                    text: "Sim",
-                    onPress: () => {
-                        api.delete(`/funcionario/${id}`)
-                            .then(() => {
-                                Alert.alert('Mensagem:', 'Funcionario Excluido com Sucesso!')
-                                goBack();
-                            })
-                            .catch((err) => Alert.alert('Mensagem:', 'Erro ao Excluir Funcionario!'));
-                    }
-                }
-            ],
-            { cancelable: false }
-        );
+        const testeNet = NetInfo.addEventListener(state => {
+            if (state.isConnected) {
+                Alert.alert(
+                    "Atenção",
+                    "Você tem certeza que deseja excluir este item?",
+                    [
+                        {
+                            text: "Não",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                        },
+                        {
+                            text: "Sim",
+                            onPress: () => {
+                                api.delete(`/funcionario/${id}`)
+                                    .then(() => {
+                                        Alert.alert('Mensagem:', 'Funcionario Excluido com Sucesso!')
+                                        goBack();
+                                    })
+                                    .catch((err) => Alert.alert('Mensagem:', 'Erro ao Excluir Funcionario!'));
+                            }
+                        }
+                    ],
+                    { cancelable: false }
+                );
+            }
+            else{
+                Alert.alert('Esta ação necessita de conexão com a internet')
+            }
+        });
+        testeNet();
     }
 
     const atualizar = async () => {
+        
+                let nome = novoNome
+                let cpf = novoCpf
+                console.log(nome, cpf)
+                api.put(`/funcionario/${id}`, { cpf: novoCpf, nome: novoNome })
+                    .then(() => {
+                        Alert.alert('Mensagem:', 'Funcionario Atualizado com Sucesso!');
+                        goBack();
+                    })
+                    .catch((err) => console.log(err));
+            }        
+    
 
-        let nome = novoNome
-        let cpf = novoCpf
-        console.log(nome, cpf)
-        api.put(`/funcionario/${id}`, { cpf: novoCpf, nome: novoNome })
-            .then(() => {
-                Alert.alert('Mensagem:', 'Funcionario Atualizado com Sucesso!')
+    const editarFuncionario = () => {
+        const testeNet = NetInfo.addEventListener(state => {
+    
+          if (state.isConnected) {
+            setVisible(true);
+          } else {
+            Alert.alert('Esta ação necessita de conexão com a internet');
+          }
+        });
+        testeNet();
+      };
 
-                goBack();
-            })
-            .catch((err) => console.log(err));
-    }
-
+    
     function goBack() {
-        navigation.navigate('Funcionario')
+        navigation.navigate('Funcionario');
     }
 
     return (
@@ -105,7 +125,7 @@ const editFunc = ({ navigation, route }) => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => setVisible(true)} >
+                <TouchableOpacity onPress={editarFuncionario} >
                     <View>
                         <Icon
                             name='account-edit-outline'
