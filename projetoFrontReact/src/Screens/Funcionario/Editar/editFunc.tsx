@@ -45,40 +45,40 @@ const editFunc = ({ navigation, route }) => {
                     { cancelable: false }
                 );
             }
-            else{
-                Alert.alert('Esta ação necessita de conexão com a internet')
+            else {
+                Alert.alert('Mensagem', 'Esta ação necessita de conexão com a internet')
             }
         });
         testeNet();
     }
 
     const atualizar = async () => {
-        
-                let nome = novoNome
-                let cpf = novoCpf
-                console.log(nome, cpf)
-                api.put(`/funcionario/${id}`, { cpf: novoCpf, nome: novoNome })
-                    .then(() => {
-                        Alert.alert('Mensagem:', 'Funcionario Atualizado com Sucesso!');
-                        goBack();
-                    })
-                    .catch((err) => console.log(err));
-            }        
-    
+
+        let nome = novoNome
+        let cpf = novoCpf
+        console.log(nome, cpf)
+        api.put(`/funcionario/${id}`, { cpf: novoCpf, nome: novoNome })
+            .then(() => {
+                Alert.alert('Mensagem:', 'Funcionario Atualizado com Sucesso!');
+                goBack();
+            })
+            .catch((err) => console.log(err));
+    }
+
 
     const editarFuncionario = () => {
         const testeNet = NetInfo.addEventListener(state => {
-    
-          if (state.isConnected) {
-            setVisible(true);
-          } else {
-            Alert.alert('Esta ação necessita de conexão com a internet');
-          }
+
+            if (state.isConnected) {
+                setVisible(true);
+            } else {
+                Alert.alert('Mensagem', 'Esta ação necessita de conexão com a internet');
+            }
         });
         testeNet();
-      };
+    };
 
-    
+
     function goBack() {
         navigation.navigate('Funcionario');
     }

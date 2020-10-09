@@ -113,7 +113,7 @@ const Funcionario = ({ navigation }) => {
       if (state.isConnected) {
         setVisible(true);
       } else {
-        Alert.alert('Esta ação necessita de conexão com a internet');
+        Alert.alert('Mensagem', 'Esta ação necessita de conexão com a internet');
       }
     });
     testeNet();
